@@ -1,1 +1,28 @@
-<p>contact-form works!</p>
+<form [formGroup]="registroForm">
+  <div class="form-group">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" formControlName="nombre" class="form-control">
+  </div>
+  <div class="error">
+    <!-- Validar los estados del campo -->
+    <div *ngIf="registroForm.get( 'nombre' )?.invalid && ( registroForm.get( 'nombre' )?.dirty || registroForm.get( 'nombre' )?.touched )  ">
+        <!-- Validar las reglas que definimos para el campo -->
+        <small *ngIf="registroForm.get( 'nombre' )?.errors?.['required']">El nombre es requerido</small>
+    </div>
+</div>
+
+  <div class="form-group">
+    <label for="email">Correo electrónico:</label>
+    <input type="email" id="email" formControlName="email" class="form-control">
+  </div>
+  <div class="error">
+    <!-- Validar los estados del campo -->
+    <div *ngIf="registroForm.get( 'email' )?.invalid && ( registroForm.get( 'email' )?.dirty || registroForm.get( 'email' )?.touched )  ">
+        <!-- Validar las reglas que definimos para el campo -->
+        <small *ngIf="registroForm.get( 'email' )?.errors?.['required']">El correo es requerido</small>
+        <small *ngIf="registroForm.get( 'email' )?.errors?.['email']">Correo no valido</small>
+    </div>
+</div>
+
+  <button type="button" (click)="onSubmit()">Guardar</button>
+</form>
