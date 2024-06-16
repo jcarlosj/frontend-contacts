@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { DataService } from '../../../services/data.service';
 
 @Component({
@@ -7,7 +7,8 @@ import { DataService } from '../../../services/data.service';
   styleUrl: './contact-list.component.css'
 })
 export class ContactListComponent {
-  registros: any[] = []; // Array para almacenar registros
+  @Input() registro!: any; // Input property to receive records from the parent component
+  registros: any[] = [];
 
   constructor(private dataService: DataService) { } // Inyectar servicio de datos
 
@@ -15,9 +16,18 @@ export class ContactListComponent {
     this.cargarRegistros(); // Cargar registros al iniciar el componente
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log( changes['registro'].currentValue );
+
+    if (changes['registro'] && changes['registro'].currentValue) {
+      this.registros.push(changes['registro'].currentValue.data);
+    }
+  }
+
   cargarRegistros(): void {
-    this.dataService.obtenerRegistros().subscribe(registros => {
-      this.registros = registros;
+    this.dataService.obtenerRegistros().subscribe(data => {
+      console.log( data );
+      this.registros = data.data;
     });
   }
 
@@ -27,8 +37,9 @@ export class ContactListComponent {
   }
 
   eliminarRegistro(registro: any): void {
-    this.dataService.eliminarRegistro(registro.id).subscribe(() => {
-      this.cargarRegistros(); // Recargar la lista después de eliminar
-    });
+    console.log('Eliminar registro:', registro); // Mostrar el registro seleccionado
+    // this.dataService.eliminarRegistro(registro.id).subscribe(() => {
+    //   this.cargarRegistros(); // Recargar la lista después de eliminar
+    // });
   }
 }

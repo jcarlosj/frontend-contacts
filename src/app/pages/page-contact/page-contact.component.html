@@ -1,7 +1,5 @@
 <div class="container">
   <h2>Registro de datos</h2>
-
-  <app-contact-form></app-contact-form>
-  <app-contact-list></app-contact-list>
-
+  <app-contact-form (registroCreado)="onRegistroCreado($event)"></app-contact-form>
+  <app-contact-list [registro]="registroCreado"></app-contact-list>
 </div>

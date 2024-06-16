@@ -1,14 +1,16 @@
-
 <h2>Registros actuales</h2>
+
 <ul class="list-group">
-  <ng-container *ngIf="registros.length > 0">
+  <ng-container *ngIf="registros && registros.length > 0; else noRecords">
     <li class="list-group-item" *ngFor="let registro of registros">
-      {{ registro.nombre }} - {{ registro.email }}
-      <button class="btn btn-sm btn-primary" (click)="editarRegistro(registro)">Editar</button>
-      <button class="btn btn-sm btn-danger" (click)="eliminarRegistro(registro)">Eliminar</button>
+      {{ registro.name }} - {{ registro.email }}
+      <div class="actions">
+        <button class="btn btn-sm btn-primary" (click)="editarRegistro(registro)">Editar</button>
+        <button class="btn btn-sm btn-danger" (click)="eliminarRegistro(registro)">Eliminar</button>
+      </div>
     </li>
   </ng-container>
-  <ng-container *ngIf="registros.length === 0">
+  <ng-template #noRecords>
     <p class="alert alert-info">No hay registros en la base de datos.</p>
-  </ng-container>
+  </ng-template>
 </ul>

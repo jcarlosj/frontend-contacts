@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrl: './page-contact.component.css'
 })
 export class PageContactComponent {
+  registroCreado: any;
 
+  onRegistroCreado(registro: any): void {
+    console.log('Nuevo registro en PageContactComponent:', registro);
+    this.registroCreado = registro;
+  }
 }

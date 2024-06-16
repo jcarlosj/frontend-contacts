@@ -1,13 +1,13 @@
 <form [formGroup]="registroForm">
   <div class="form-group">
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" formControlName="nombre" class="form-control">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" formControlName="name" class="form-control">
   </div>
   <div class="error">
     <!-- Validar los estados del campo -->
-    <div *ngIf="registroForm.get( 'nombre' )?.invalid && ( registroForm.get( 'nombre' )?.dirty || registroForm.get( 'nombre' )?.touched )  ">
+    <div *ngIf="registroForm.get( 'name' )?.invalid && ( registroForm.get( 'name' )?.dirty || registroForm.get( 'name' )?.touched )  ">
         <!-- Validar las reglas que definimos para el campo -->
-        <small *ngIf="registroForm.get( 'nombre' )?.errors?.['required']">El nombre es requerido</small>
+        <small *ngIf="registroForm.get( 'name' )?.errors?.['required']">El nombre es requerido</small>
     </div>
 </div>
 
